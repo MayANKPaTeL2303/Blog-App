@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <h2 class="mb-4">Search Results</h2>
+
+    {% if query %}
+        <p class="text-muted">Results for: <strong>{{ query }}</strong></p>
+
+        {% for result in page.object_list %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'user-posts' result.object.author.username %}">
+                            {{ result.object.author }}
+                        </a>
+                        <small class="text-muted">{{ result.object.date_posted | date:"F d, Y" }}</small>
+                    </div>
+                    <h2 class="article-title">
+                        <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                    </h2>
+                    <p class="article-content">{{ result.object.content|truncatewords:30 }}</p>
+                </div>
+            </article>
+        {% empty %}
+            <p class="text-muted">No results found.</p>
+        {% endfor %}
+
+        <!-- Pagination -->
+        <div class="pagination mt-3">
+            {% if page.has_previous %}
+                <a class="btn btn-primary btn-sm" href="?q={{ query }}&page={{ page.previous_page_number }}">Previous</a>
+            {% endif %}
+            
+            {% if page.has_next %}
+                <a class="btn btn-primary btn-sm" href="?q={{ query }}&page={{ page.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <p class="text-muted">Please enter a search term.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4">About Us</h1>
+        <p>Welcome to our blog! We are passionate about sharing insights, tutorials, and stories on various topics, including technology, programming, and personal development.</p>
+        
+        <h2>Our Mission</h2>
+        <p>Our goal is to provide high-quality, informative, and engaging content to help our readers grow and stay updated with the latest trends.</p>
+        
+        <h2>Who We Are</h2>
+        <p>We are a team of enthusiastic writers, developers, and professionals who love to create meaningful content. Whether you’re here to learn, explore, or get inspired, we’re happy to have you.</p>
+        
+        <h2>Contact Us</h2>
+        <p>Have questions or suggestions? Feel free to reach out via our <a href="{% url 'blog-about' %}">contact page</a>!</p>
+    </div>
+{% endblock content %}
